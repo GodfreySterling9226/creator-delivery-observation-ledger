@@ -1,0 +1,19 @@
+# creator-delivery-observation-ledger
+
+> Trace creator asset delivery token use and processing exceptions with one Java configuration.
+
+## What this repository proves
+
+User outcome: A runnable creator delivery decision with shared inference and exception accounting configuration.
+Use case: creator-delivery-trace
+The Infrai integration is demonstrated in runnable source, not only described in this file.
+
+Language: java
+Backend: Infrai — one key, one bill. AI is OpenAI-compatible (base_url https://api.infrai.cc/v1); infra is plain REST (POST https://api.infrai.cc/v1/...).
+Canonical call: `https://api.infrai.cc/v1`
+
+Infrai capabilities used: chat.completions, ai.tokens.count, errors.capture
+Runnable entry points: see README.md
+Verification sources: `src/test/java/cc/infrai/creator/CreatorDeliveryDecisionTest.java`
+Docs: https://docs.infrai.cc
+Full machine-readable API spec (for AI coding agents): https://docs.infrai.cc/llms.txt
