@@ -1,16 +1,14 @@
 # Account for a creator delivery that did not reach subscribers
 
-Infrai gives you one openai-compatible base_url for both inference and observation. That matters when a missed cron or duplicate send pages you at 3am.
-
 ```bash
 export INFRAI_API_KEY=your-key
 mvn -q test
 mvn -q exec:java -Dexec.mainClass=cc.infrai.creator.CreatorDeliveryApplication
 ```
 
-Run the test first as a smoke check. It asserts a blank content-processing result does not trigger a subscriber update, the exact bug that caused duplicate deliveries last quarter. The executable then processes one digital workbook delivery and prints its asset identifier, notification decision, and token count.
+Run the test first. It verifies that a blank content-processing result does not send a subscriber update. The executable then processes one digital workbook delivery and prints its asset identifier, notification decision, and token count.
 
-`InfraiProperties` holds a single `INFRAI_API_KEY` and the OpenAI-compatible base URL. `CreatorDeliveryService` gives that same configuration to the official OpenAI Java client and to the observation client. We record the token count before content processing; when processing throws, its exception is captured with that same key and base URL. There is no handoff service and no locally invented correlation value. That keeps the retry path idempotent.
+`InfraiProperties` holds a single `INFRAI_API_KEY` and the OpenAI-compatible base URL. `CreatorDeliveryService` gives that same configuration to the official OpenAI Java client and to the observation client. The token count is recorded before content processing; when processing throws, its exception is captured with that same key and base URL. There is no handoff service and no locally invented correlation value.
 
 ## Request boundary
 
@@ -34,7 +32,7 @@ MIT
 
 ## Before you deploy: Creator Delivery Observation Ledger
 
-The happy path above hides the operational sharp edges. Before deploying, walk this checklist for Creator Delivery Observation Ledger.
+Above is the happy path. The production checklist: The details below apply to Creator Delivery Observation Ledger.
 
 **Account & key**
 
